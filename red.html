@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let len = parseInt(prompt("Enter the length:"));
+        let arr = new Array();
+
+        for (let index = 1; index <= len; index++) {
+            arr[index] = index;
+        }
+
+        //console.log(arr);
+
+        let product = arr.reduce((prev, curr) => {
+            return prev * curr;
+        });
+
+        console.log(product);
+    </script>
+</body>
+
+</html>

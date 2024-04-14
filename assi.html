@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #parent {
+      height: 200px;
+      width: 500px;
+      display: flex;
+      background-color: black;
+      align-items: end;
+      margin: 100px auto;
+    }
+
+    .child {
+      width: 20%;
+      height: 100%;
+      border: 1px solid wheat;
+      animation-name: col;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+
+    #child1 {
+      animation-delay: 0.16s;
+      background-color: rgb(154, 3, 224);
+    }
+
+    #child2 {
+      animation-delay: 0.27s;
+      background-color: rgb(246, 113, 237);
+    }
+
+    #child3 {
+      animation-delay: 0.98s;
+      background-color: rgb(231, 78, 134);
+    }
+
+    #child4 {
+      animation-delay: 0.47s;
+      background-color: rgb(238, 124, 17);
+    }
+
+    #child5 {
+      animation-delay: 0.36s;
+      background-color: rgb(242, 242, 77);
+    }
+
+    @keyframes col {
+      0% {
+        height: 100%;
+      }
+      20% {
+        height: 80%;
+      }
+      40% {
+        height: 40%;
+      }
+      60% {
+        height: 80%;
+      }
+      80% {
+        height: 20%;
+      }
+      100% {
+        height: 0%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="parent" class="parent">
+    <div class="child" id="child1"></div>
+    <div class="child" id="child2"></div>
+    <div class="child" id="child3"></div>
+    <div class="child" id="child4"></div>
+    <div class="child" id="child5"></div>
+  </div>
+  <button id="btn1" onclick="startAnimation()">START</button>
+  <button id="btn2" onclick="resetAnimation()">RESET</button>
+  <button id="btn3" onclick="stopAnimation()">STOP</button>
+
+ <script>
+  let animationInterval;
+  let isAnimating = false;
+
+  function startAnimation() {
+    if (!isAnimating) {
+      resetAnimationState();
+
+      document.querySelectorAll('.child').forEach(function (child) {
+        child.style.animationPlayState = 'running';
+      });
+
+      animationInterval = setInterval(function () {
+        document.querySelectorAll('.child').forEach(function (child) {
+          child.style.animationPlayState = 'running';
+        });
+      }, 1000);
+
+      isAnimating = true;
+    } else {
+      // If animation is already running, stop it
+      stopAnimation();
+      isAnimating = false;
+    }
+  }
+
+  function resetAnimation() {
+    if (isAnimating) {
+      clearInterval(animationInterval);
+      resetAnimationState();
+      isAnimating = false;
+    } else {
+      // If animation is not running, start it
+      startAnimation();
+    }
+  }
+
+  function stopAnimation() {
+    clearInterval(animationInterval);
+    document.querySelectorAll('.child').forEach(function (child) {
+      child.style.animationPlayState = 'paused';
+    });
+
+    isAnimating = false;
+  }
+
+  function resetAnimationState() {
+    clearInterval(animationInterval); // Clear the animation interval
+    document.querySelectorAll('.child').forEach(function (child) {
+      child.style.animationPlayState = 'paused';
+      child.style.animation = 'none'; // Clear animation
+      child.style.height = '100%';
+    });
+  }
+</script>
+
+  
+</body>
+</html>
