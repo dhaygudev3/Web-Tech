@@ -90,7 +90,6 @@
   function startAnimation() {
     if (!isAnimating) {
       resetAnimationState();
-
       document.querySelectorAll('.child').forEach(function (child) {
         child.style.animationPlayState = 'running';
       });
@@ -114,6 +113,7 @@
       clearInterval(animationInterval);
       resetAnimationState();
       isAnimating = false;
+      startAnimation();
     } else {
       // If animation is not running, start it
       startAnimation();
